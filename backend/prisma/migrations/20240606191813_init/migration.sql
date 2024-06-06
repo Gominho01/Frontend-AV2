@@ -4,7 +4,10 @@ CREATE TABLE "Cliente" (
     "nome" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "senha" TEXT NOT NULL,
-    "login" TEXT NOT NULL
+    "cpf" TEXT NOT NULL,
+    "nascimento" DATETIME NOT NULL,
+    "telefone" TEXT NOT NULL,
+    "estadoCivil" TEXT NOT NULL DEFAULT 'SOLTEIRO'
 );
 
 -- CreateTable
@@ -27,4 +30,4 @@ CREATE TABLE "SolicitacaoServicoTI" (
 CREATE UNIQUE INDEX "Cliente_email_key" ON "Cliente"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Cliente_login_key" ON "Cliente"("login");
+CREATE UNIQUE INDEX "Cliente_cpf_key" ON "Cliente"("cpf");

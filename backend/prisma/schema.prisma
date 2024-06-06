@@ -12,6 +12,11 @@ model Cliente {
   nome     String
   email    String   @unique
   senha    String
+  cpf      String   @unique
+  nascimento DateTime
+  telefone String
+  estadoCivil String @default("SOLTEIRO")
+
   SolicitacaoServicoTI SolicitacaoServicoTI[]
 }
 
@@ -30,3 +35,4 @@ model SolicitacaoServicoTI {
   cliente     Cliente  @relation(fields: [clienteId], references: [id])
   servico     ServicoTI @relation(fields: [servicoId], references: [id])
 }
+

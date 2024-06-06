@@ -33,21 +33,31 @@ const trocarSenha = async (req, res) => {
   }
   
   const cadastrarCliente = async (req, res) => {
-    const { nome, email, senha } = req.body;
+    const { nome, email, senha, cpf, telefone, nascimento, estadoCivil } = req.body;
+  
     try {
-      const clienteExistente = await prisma.cliente.findUnique({
-        where: { email }
-      });
+      const clienteExistente = await prisma.cliente.findUnique({ where: { email } });
+  
       if (clienteExistente) {
         return res.status(400).json({ message: "Email já cadastrado" });
       }
+  
       await prisma.cliente.create({
-        data: { nome, email, senha }
+        data: {
+          nome,
+          email,
+          senha,
+          cpf,
+          telefone,
+          nascimento: new Date(nascimento), // Certifique-se de que a data está no formato correto
+          estadoCivil
+        }
       });
+  
       res.status(201).json({ message: "Cliente cadastrado com sucesso" });
     } catch (error) {
-      console.error("Erro ao cadastrar cliente:", error);
-      res.status(500).json({ message: "Erro interno do servidor" });
+      console.error('Erro ao cadastrar cliente:', error);
+      res.status(500).json({ message: "Erro ao cadastrar cliente" });
     }
   };
 

@@ -1,4 +1,3 @@
-// CadastroCliente.js
 import React, { useState } from 'react';
 import api from '../services/api';
 
@@ -10,7 +9,8 @@ const CadastroCliente = () => {
     confirmPassword: '',
     cpf: '',
     telefone: '',
-    nascimento: ''
+    nascimento: '',
+    estadoCivil: 'SOLTEIRO' // Valor default
   });
   const [mensagem, setMensagem] = useState('');
 
@@ -20,7 +20,7 @@ const CadastroCliente = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { nome, email, senha, confirmPassword, cpf, telefone, nascimento } = formData;
+    const { nome, email, senha, confirmPassword, cpf, telefone, nascimento, estadoCivil } = formData;
 
     if (senha !== confirmPassword) {
       setMensagem('As senhas não coincidem');
@@ -28,7 +28,7 @@ const CadastroCliente = () => {
     }
 
     try {
-      const response = await api.post('/cliente', { nome, email, senha, cpf, telefone, nascimento });
+      const response = await api.post('/api/clientes', { nome, email, senha, cpf, telefone, nascimento, estadoCivil });
       setMensagem(response.data.message);
     } catch (error) {
       setMensagem('Erro ao cadastrar cliente');
@@ -67,6 +67,25 @@ const CadastroCliente = () => {
           <label htmlFor="nascimento">Data de Nascimento</label>
           <input type="date" id="nascimento" value={formData.nascimento} onChange={handleChange} />
         </div>
+        <div className="input-group">
+          <label>Estado Civil</label>
+          <div>
+            <input type="radio" id="solteiro" name="estadoCivil" value="SOLTEIRO" checked={formData.estadoCivil === 'SOLTEIRO'} onChange={handleChange} />
+            <label htmlFor="solteiro">Solteiro(a)</label>
+          </div>
+          <div>
+            <input type="radio" id="casado" name="estadoCivil" value="CASADO" checked={formData.estadoCivil === 'CASADO'} onChange={handleChange} />
+            <label htmlFor="casado">Casado(a)</label>
+          </div>
+          <div>
+            <input type="radio" id="divorciado" name="estadoCivil" value="DIVORCIADO" checked={formData.estadoCivil === 'DIVORCIADO'} onChange={handleChange} />
+            <label htmlFor="divorciado">Divorciado(a)</label>
+          </div>
+          <div>
+            <input type="radio" id="viuvo" name="estadoCivil" value="VIUVO" checked={formData.estadoCivil === 'VIUVO'} onChange={handleChange} />
+            <label htmlFor="viuvo">Viúvo(a)</label>
+          </div>
+        </div>
         <div className="button-group">
           <button type="submit">Cadastrar</button>
         </div>
@@ -77,4 +96,3 @@ const CadastroCliente = () => {
 };
 
 export default CadastroCliente;
-  
