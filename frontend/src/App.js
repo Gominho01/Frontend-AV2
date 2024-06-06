@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import HomePage from './components/HomePage';
+import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import TrocaSenhaPage from './pages/TrocaSenhaPage';
 import CadastroClientePage from './pages/CadastroClientePage';

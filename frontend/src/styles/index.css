@@ -1,0 +1,184 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+header {    
+  color: #fff;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-image: url('../imagens/imgheader.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+#menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#menu li {
+  display: inline-block;
+}
+
+#menu a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: rgb(142, 154, 196);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 20px;
+  transition: background-color 0.3s;
+}
+
+#menu a:hover {
+  background-color: #999;
+}
+
+
+header img {
+  height: 80px;
+  width: auto;
+  margin-left:20px;
+}
+
+header h1 {
+  font-size: 24px;
+  margin: 0; 
+  font-family: 'Poppins', sans-serif;
+  margin-left: 120px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+section {
+  padding: 20px;
+  text-align:center;  
+}
+
+.gallery img {
+  max-width: 100%;
+  height: auto;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+
+
+.services {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.services div {
+  width: 20%;
+  padding: 10px;
+  margin-bottom: 80px;
+  background-color: rgb(166, 174, 202);
+  border: 1px solid #222324;
+  border-radius: 5px;
+}
+
+.services div h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+}
+
+.services div p {
+  font-family: 'Poppins', sans-serif;
+}
+
+
+
+.tabela, th, td {
+  margin: auto;
+  width: 30%;
+  border-collapse: collapse;
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #222324;
+  overflow-x: auto;
+  border-radius: 8px;
+  
+}
+
+th {
+  background-color: rgb(166, 174, 202);
+  font-family: 'Poppins', sans-serif;
+}
+
+.tabela caption {
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  padding: 10px;
+}
+
+footer {
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+  background-image: url('../imagens/imgheader.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+footer div {
+  margin-bottom: 20px;
+}
+
+.contact, .address, .payment {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.contact ul {
+  list-style: none;
+  padding: 0;
+}
+
+.contact ul li {
+  margin-bottom: 10px;
+}
+
+.contact a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.contact a:hover {
+  text-decoration: underline;
+}
+
+.payment img {
+  max-width: 50px;
+  margin: 0 5px;
+}

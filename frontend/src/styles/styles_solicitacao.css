@@ -1,0 +1,159 @@
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+header {    
+    color: #fff;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-image: url('../imagens/imgheader.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+#menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#menu li {
+    display: inline-block;
+    margin-right:20px;
+}
+
+#menu a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgb(142, 154, 196);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+#menu a:hover {
+    background-color: #999;
+}
+
+header h1 {
+    font-size: 24px;
+    margin-left: 120px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.logo img {
+    height: 80px;
+    width: auto;
+    margin-left:20px;
+}
+
+h1 {
+    margin: 0;
+}
+
+section {
+    padding: 20px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-weight: bold;
+}
+
+button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.excluir-btn {
+    background-color: #dc3545;
+}
+
+.excluir-btn:hover {
+    background-color: #c82333;
+}
+
+
+footer {
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+    background-image: url('../imagens/imgheader.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+footer div {
+    margin-bottom: 20px;
+}
+
+.contact, .address, .payment {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.contact ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact ul li {
+    margin-bottom: 10px;
+}
+
+.contact a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.contact a:hover {
+    text-decoration: underline;
+}
+
+.payment img {
+    max-width: 50px;
+    margin: 0 5px;
+}

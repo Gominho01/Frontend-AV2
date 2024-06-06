@@ -1,36 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import api from '../services/api';
+import React from 'react';
+import Home from '../components/HomePage/Home';
 
-const HomePage = () => {
-  const [servicos, setServicos] = useState([]);
-  const [mensagem, setMensagem] = useState('');
-
-  useEffect(() => {
-    const fetchServicos = async () => {
-      try {
-        const response = await api.get('/servico');
-        setServicos(response.data.servicos);
-      } catch (error) {
-        setMensagem('Erro ao carregar serviços');
-      }
-    };
-
-    fetchServicos();
-  }, []);
-
+const CarrinhoSolicitacaoPage = ({ userLogin }) => {
   return (
-    <div className="homepage-container">
-      <h1>Serviços Disponíveis</h1>
-      {mensagem && <p>{mensagem}</p>}
-      <ul>
-        {servicos.map(servico => (
-          <li key={servico.id}>
-            {servico.nome} - R$ {servico.preco.toFixed(2)}
-          </li>
-        ))}
-      </ul>
+    <div>
+      <Home />
     </div>
   );
 };
 
-export default HomePage;
+export default CarrinhoSolicitacaoPage;
