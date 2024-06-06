@@ -1,0 +1,32 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Cliente {
+  id       Int      @id @default(autoincrement())
+  nome     String
+  email    String   @unique
+  senha    String
+  SolicitacaoServicoTI SolicitacaoServicoTI[]
+}
+
+model ServicoTI {
+  id          Int      @id @default(autoincrement())
+  nome        String
+  descricao   String
+  SolicitacaoServicoTI SolicitacaoServicoTI[]
+}
+
+model SolicitacaoServicoTI {
+  id          Int      @id @default(autoincrement())
+  clienteId   Int
+  servicoId   Int
+
+  cliente     Cliente  @relation(fields: [clienteId], references: [id])
+  servico     ServicoTI @relation(fields: [servicoId], references: [id])
+}
