@@ -10,7 +10,7 @@ const TrocaSenha = () => {
   const handleTrocaSenha = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.put('/cliente/senha', { login, senhaAtual, novaSenha });
+      const response = await api.put('api/cliente/trocar-senha', { login, senhaAtual, novaSenha });
       setMensagem(response.data.message);
     } catch (error) {
       setMensagem('Erro ao trocar a senha');

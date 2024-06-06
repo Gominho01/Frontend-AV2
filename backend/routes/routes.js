@@ -25,20 +25,20 @@ router.get('/clientes', (request, response) =>
 );
 
 // Rotas de serviços de TI
-router.post('/servicos-ti', (request, response) =>
+router.post('/servicos', (request, response) =>
     servicosTIController.cadastrarServico(request, response)
 );
 
-router.get('/servicos-ti', (request, response) =>
+router.get('/servicos', (request, response) =>
     servicosTIController.consultarServicos(request, response)
 );
 
 // Rotas de solicitações de serviços de TI
-router.get('/solicitacoes-servico-ti/:email',(request, response) =>
+router.get('/solicitacoes/:email',(request, response) =>
     solicitacoesController.lerSolicitacoes(request, response)
 );
 
-router.put('/solicitacoes-servico-ti/:email', (request, response) =>
+router.put('/solicitacoes/:email', (request, response) =>
     solicitacoesController.atualizarSolicitacoes(request, response)
 );
 

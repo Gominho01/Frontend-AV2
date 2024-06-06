@@ -8,7 +8,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchServicos = async () => {
       try {
-        const response = await api.get('/servico');
+        const response = await api.get('api/servico');
         setServicos(response.data.servicos);
       } catch (error) {
         setMensagem('Erro ao carregar serviços');
