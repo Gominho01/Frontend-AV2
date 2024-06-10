@@ -2,7 +2,6 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
-const servicosTIController = require('../controllers/servicosController');
 const solicitacoesController = require('../controllers/solicitacoesController');
 const clienteController = require('../controllers/clienteController');
 

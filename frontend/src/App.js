@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { AuthProvider, AuthContext } from './context/authContext';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import TrocaSenhaPage from './pages/TrocaSenhaPage';
@@ -7,25 +8,29 @@ import CadastroClientePage from './pages/CadastroClientePage';
 import CarrinhoSolicitacaoPage from './pages/CarrinhoSolicitacaoPage';
 
 const App = () => {
-  const [token, setToken] = useState('');
-  const [userLogin, setUserLogin] = useState('');
-
-  const handleLogin = (token, userLogin) => {
-    setToken(token);
-    setUserLogin(userLogin);
-  };
-
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
-        <Route path="/trocar-senha" element={token ? <TrocaSenhaPage /> : <Navigate to="/login" />} />
-        <Route path="/cadastro-cliente" element={<CadastroClientePage/>}/>
-        <Route path="/carrinho-solicitacao" element={token ? <CarrinhoSolicitacaoPage userLogin={userLogin} /> : <Navigate to="/login" />} />
-        <Route path="/" element={<HomePage />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<LoginPageWrapper />} />
+          <Route path="/trocar-senha" element={<RequireAuth><TrocaSenhaPage /></RequireAuth>} />
+          <Route path="/cadastro-cliente" element={<CadastroClientePage />} />
+          <Route path="/carrinho-solicitacao" element={<RequireAuth><CarrinhoSolicitacaoPage /></RequireAuth>} />
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
+};
+
+const LoginPageWrapper = () => {
+  const { login } = useContext(AuthContext);
+  return <LoginPage onLogin={login} />;
+};
+
+const RequireAuth = ({ children }) => {
+  const { token } = useContext(AuthContext);
+  return token ? children : <Navigate to="/login" />;
 };
 
 export default App;
