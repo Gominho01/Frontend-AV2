@@ -24,7 +24,8 @@ model Cliente {
 model ServicoTI {
   id          Int      @id @default(autoincrement())
   nome        String
-  descricao   String
+  preco       Int
+  prazo       Int
   SolicitacaoServicoTI SolicitacaoServicoTI[]
 }
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
+import "../styles/styles_solicitacao.css"
 
 const CarrinhoSolicitacao = ({ userLogin }) => {
   const [servicos, setServicos] = useState([]);
