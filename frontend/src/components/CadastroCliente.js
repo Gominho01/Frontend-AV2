@@ -10,7 +10,8 @@ const CadastroCliente = () => {
     cpf: '',
     telefone: '',
     nascimento: '',
-    estadoCivil: 'SOLTEIRO' // Valor default
+    estadoCivil: 'SOLTEIRO', // Valor default
+    escolaridade: '2o-grau-completo' // Valor default
   });
   const [mensagem, setMensagem] = useState('');
 
@@ -20,7 +21,7 @@ const CadastroCliente = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { nome, email, senha, confirmPassword, cpf, telefone, nascimento, estadoCivil } = formData;
+    const { nome, email, senha, confirmPassword, cpf, telefone, nascimento, estadoCivil, escolaridade } = formData;
 
     if (senha !== confirmPassword) {
       setMensagem('As senhas não coincidem');
@@ -28,7 +29,7 @@ const CadastroCliente = () => {
     }
 
     try {
-      const response = await api.post('/api/clientes', { nome, email, senha, cpf, telefone, nascimento, estadoCivil });
+      const response = await api.post('/api/clientes', { nome, email, senha, cpf, telefone, nascimento, estadoCivil, escolaridade });
       setMensagem(response.data.message);
     } catch (error) {
       setMensagem('Erro ao cadastrar cliente');
@@ -85,6 +86,21 @@ const CadastroCliente = () => {
             <input type="radio" id="viuvo" name="estadoCivil" value="VIUVO" checked={formData.estadoCivil === 'VIUVO'} onChange={handleChange} />
             <label htmlFor="viuvo">Viúvo(a)</label>
           </div>
+        </div>
+        <div className="input-group">
+          <label htmlFor="escolaridade">Escolaridade:</label>
+          <select 
+            id="escolaridade" 
+            name="escolaridade" 
+            value={formData.escolaridade} 
+            onChange={handleChange}
+          >
+            <option value="1o-grau-incompleto">1º Grau Incompleto</option>
+            <option value="1o-grau-completo">1º Grau Completo</option>
+            <option value="2o-grau-completo">2º Grau Completo</option>
+            <option value="nivel-superior">Nível Superior</option>
+            <option value="pos-graduado">Pós-Graduado</option>
+          </select>
         </div>
         <div className="button-group">
           <button type="submit">Cadastrar</button>

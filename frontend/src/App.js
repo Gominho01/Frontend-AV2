@@ -5,7 +5,6 @@ import LoginPage from './pages/LoginPage';
 import TrocaSenhaPage from './pages/TrocaSenhaPage';
 import CadastroClientePage from './pages/CadastroClientePage';
 import CarrinhoSolicitacaoPage from './pages/CarrinhoSolicitacaoPage';
-import CadastroServicoPage from './pages/CadastroServicoPage';
 
 const App = () => {
   const [token, setToken] = useState('');
@@ -23,7 +22,6 @@ const App = () => {
         <Route path="/trocar-senha" element={token ? <TrocaSenhaPage /> : <Navigate to="/login" />} />
         <Route path="/cadastro-cliente" element={<CadastroClientePage/>}/>
         <Route path="/carrinho-solicitacao" element={token ? <CarrinhoSolicitacaoPage userLogin={userLogin} /> : <Navigate to="/login" />} />
-        <Route path="/cadastro-servico" element={token ? <CadastroServicoPage /> : <Navigate to="/login" />} />
         <Route path="/" element={<HomePage />} />
       </Routes>
     </Router>
