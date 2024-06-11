@@ -1,11 +1,12 @@
 // Services.js
 import React from 'react';
+import "../../styles/index.css";
 
 const Services = () => {
   return (
-    <div className="services">
-      <div className="service">
-        <h2>Nossos Serviços de TI</h2>
+    <div className="services-container">
+      <h2>Nossos Serviços de TI</h2>
+      <div className="services-list">
         <div className="service">
           <h3>Serviço 1</h3>
           <p>Descrição do serviço 1.</p>
