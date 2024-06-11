@@ -1,48 +1,92 @@
-// solicitacoesServicoTIController.js
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+const criarSolicitacao = async (req, res) => {
+  const { email, servicoId, estado } = req.body;
+
+  try {
+    // Obter o serviço de TI pelo ID para recuperar o prazo
+    const servico = await prisma.servicoTI.findUnique({
+      where: { id: servicoId },
+    });
+
+    if (!servico) {
+      return res.status(404).json({ message: 'Serviço não encontrado' });
+    }
+
+    // Calcular a data prevista
+    const dataAtual = new Date();
+    const dataPrevista = new Date(dataAtual.getTime() + (servico.prazo * 24 * 60 * 60 * 1000));
+
+    // Criar a solicitação de serviço com a data prevista e o estado
+    const novaSolicitacao = await prisma.solicitacao.create({
+      data: {
+        email,
+        servicoId,
+        Estado: estado, // Incluído o estado aqui
+        dataPrevista: dataPrevista,
+      },
+    });
+
+    res.status(201).json(novaSolicitacao);
+  } catch (error) {
+    console.error('Erro ao criar solicitação:', error);
+    res.status(500).json({ message: 'Erro ao criar solicitação' });
+  }
+};
+
+
 const lerSolicitacoes = async (req, res) => {
   const { email } = req.params;
+
   try {
-    const usuario = await prisma.cliente.findUnique({
+    const cliente = await prisma.cliente.findUnique({
       where: { email },
-      include: { solicitacoesServicoTI: true }
+      include: { Solicitacao: true },
     });
-    if (!usuario) {
-      return res.status(404).json({ message: "Usuário não encontrado" });
+
+    if (!cliente) {
+      return res.status(404).json({ message: 'Cliente não encontrado' });
     }
-    res.status(200).json({ solicitacoesServicoTI: usuario.solicitacoesServicoTI });
+
+    res.status(200).json(cliente.Solicitacao);
   } catch (error) {
-    console.error("Erro ao ler solicitações por usuário:", error);
-    res.status(500).json({ message: "Erro interno do servidor" });
+    console.error('Erro ao ler solicitações:', error);
+    res.status(500).json({ message: 'Erro ao ler solicitações' });
   }
 };
 
 const atualizarSolicitacoes = async (req, res) => {
   const { email } = req.params;
   const { solicitacoes } = req.body;
+
   try {
-    const usuario = await prisma.cliente.findUnique({
-      where: { email }
-    });
-    if (!usuario) {
-      return res.status(404).json({ message: "Usuário não encontrado" });
-    }
-    await prisma.cliente.update({
+    const cliente = await prisma.cliente.findUnique({
       where: { email },
-      data: {
-        solicitacoesServicoTI: {
-          deleteMany: {},
-          create: solicitacoes
-        }
-      }
     });
-    res.status(200).json({ message: "Solicitações atualizadas com sucesso" });
+
+    if (!cliente) {
+      return res.status(404).json({ message: 'Cliente não encontrado' });
+    }
+
+    for (const solicitacao of solicitacoes) {
+      await prisma.solicitacaoS.update({
+        where: { id: solicitacao.id },
+        data: {
+          Estado: solicitacao.Estado,
+        },
+      });
+    }
+
+    res.status(200).json({ message: 'Solicitações atualizadas com sucesso' });
   } catch (error) {
-    console.error("Erro ao atualizar solicitações por usuário:", error);
-    res.status(500).json({ message: "Erro interno do servidor" });
+    console.error('Erro ao atualizar solicitações:', error);
+    res.status(500).json({ message: 'Erro ao atualizar solicitações' });
   }
 };
 
-module.exports = { lerSolicitacoes, atualizarSolicitacoes };
+module.exports = {
+  criarSolicitacao,
+  lerSolicitacoes,
+  atualizarSolicitacoes,
+};

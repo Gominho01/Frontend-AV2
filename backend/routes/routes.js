@@ -32,4 +32,8 @@ router.put('/solicitacoes/:email', (request, response) =>
     solicitacoesController.atualizarSolicitacoes(request, response)
 );
 
+router.post('/solicitacoes', (request, response) =>
+    solicitacoesController.criarSolicitacao(request, response)
+);
+
 module.exports = router;

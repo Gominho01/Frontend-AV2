@@ -1,6 +1,5 @@
 // clienteController.js
 const { PrismaClient } = require('@prisma/client');
-const bcrypt = require('bcrypt');
 const prisma = new PrismaClient();
 
 const senhaValida = (senha) => {
@@ -73,16 +72,14 @@ const trocarSenha = async (req, res) => {
       return res.status(404).json({ message: "Cliente não encontrado" });
     }
 
-    const senhaCorreta = await bcrypt.compare(senhaAtual, cliente.senha);
+    const senhaCorreta = senhaAtual === cliente.senha;
     if (!senhaCorreta) {
       return res.status(401).json({ message: "Senha atual incorreta" });
     }
 
-    const hashedNovaSenha = await bcrypt.hash(novaSenha, 10);
-
     await prisma.cliente.update({
       where: { email },
-      data: { senha: hashedNovaSenha }
+      data: { senha: novaSenha }
     });
 
     res.status(200).json({ message: "Senha atualizada com sucesso" });
@@ -114,13 +111,11 @@ const cadastrarCliente = async (req, res) => {
       return res.status(400).json({ message: "Email já cadastrado" });
     }
 
-    const hashedSenha = await bcrypt.hash(senha, 10);
-
     await prisma.cliente.create({
       data: {
         nome,
         email,
-        senha: hashedSenha,
+        senha,
         cpf,
         telefone,
         nascimento: new Date(nascimento), // Certifique-se de que a data está no formato correto
