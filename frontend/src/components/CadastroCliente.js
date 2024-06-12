@@ -1,6 +1,6 @@
+// CadastroCliente.js
 import React, { useState } from 'react';
 import api from '../services/api';
-import '../styles/styles_cadastro.css';
 
 const CadastroCliente = () => {
   const [formData, setFormData] = useState({
@@ -17,13 +17,12 @@ const CadastroCliente = () => {
   const [mensagem, setMensagem] = useState('');
 
   const handleChange = (e) => {
-    const { id, value, type, name } = e.target;
-    // Atualiza o estado para radio buttons com base no name
-    if (type === 'radio') {
-      setFormData({ ...formData, [name]: value });
-    } else {
-      setFormData({ ...formData, [id]: value });
-    }
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
+
+  const handleRadioChange = (e) => {
+    setFormData({ ...formData, estadoCivil: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -39,7 +38,7 @@ const CadastroCliente = () => {
       const response = await api.post('/api/clientes', { nome, email, senha, cpf, telefone, nascimento, estadoCivil, escolaridade });
       setMensagem(response.data.message);
     } catch (error) {
-      setMensagem('Erro ao cadastrar cliente');
+      setMensagem(error.response?.data?.message || 'Erro ao cadastrar cliente');
     }
   };
 
@@ -79,58 +78,25 @@ const CadastroCliente = () => {
           <div className="input-group">
             <label>Estado Civil</label>
             <div>
-              <input 
-                type="radio" 
-                id="solteiro" 
-                name="estadoCivil" 
-                value="SOLTEIRO" 
-                checked={formData.estadoCivil === 'SOLTEIRO'} 
-                onChange={handleChange} 
-              />
+              <input type="radio" id="solteiro" name="estadoCivil" value="SOLTEIRO" checked={formData.estadoCivil === 'SOLTEIRO'} onChange={handleRadioChange} />
               <label htmlFor="solteiro">Solteiro(a)</label>
             </div>
             <div>
-              <input 
-                type="radio" 
-                id="casado" 
-                name="estadoCivil" 
-                value="CASADO" 
-                checked={formData.estadoCivil === 'CASADO'} 
-                onChange={handleChange} 
-              />
+              <input type="radio" id="casado" name="estadoCivil" value="CASADO" checked={formData.estadoCivil === 'CASADO'} onChange={handleRadioChange} />
               <label htmlFor="casado">Casado(a)</label>
             </div>
             <div>
-              <input 
-                type="radio" 
-                id="divorciado" 
-                name="estadoCivil" 
-                value="DIVORCIADO" 
-                checked={formData.estadoCivil === 'DIVORCIADO'} 
-                onChange={handleChange} 
-              />
+              <input type="radio" id="divorciado" name="estadoCivil" value="DIVORCIADO" checked={formData.estadoCivil === 'DIVORCIADO'} onChange={handleRadioChange} />
               <label htmlFor="divorciado">Divorciado(a)</label>
             </div>
             <div>
-              <input 
-                type="radio" 
-                id="viuvo" 
-                name="estadoCivil" 
-                value="VIUVO" 
-                checked={formData.estadoCivil === 'VIUVO'} 
-                onChange={handleChange} 
-              />
+              <input type="radio" id="viuvo" name="estadoCivil" value="VIUVO" checked={formData.estadoCivil === 'VIUVO'} onChange={handleRadioChange} />
               <label htmlFor="viuvo">Viúvo(a)</label>
             </div>
           </div>
           <div className="input-group">
             <label htmlFor="escolaridade">Escolaridade:</label>
-            <select 
-              id="escolaridade" 
-              name="escolaridade" 
-              value={formData.escolaridade} 
-              onChange={handleChange}
-            >
+            <select id="escolaridade" name="escolaridade" value={formData.escolaridade} onChange={handleChange}>
               <option value="1o-grau-incompleto">1º Grau Incompleto</option>
               <option value="1o-grau-completo">1º Grau Completo</option>
               <option value="2o-grau-completo">2º Grau Completo</option>

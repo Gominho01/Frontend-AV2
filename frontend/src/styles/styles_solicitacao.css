@@ -1,7 +1,3 @@
-h1 {
-    margin: 0;
-}
-
 section {
     padding: 20px;
     margin: 20px auto;
@@ -27,6 +23,7 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -48,9 +45,8 @@ th {
 }
 
 .excluir-btn:hover {
-    background-color: #c82333;
+    background-color: #c82333;
 }
-
 
 footer {
     padding: 20px;
@@ -92,4 +88,52 @@ footer div {
 .payment img {
     max-width: 50px;
     margin: 0 5px;
+}
+
+/* Estilos para centralizar o carrinho de solicitação */
+.carrinho-solicitacao-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Ajusta o alinhamento para o topo */
+    min-height: calc(100vh - 80px); /* Ajuste de altura para acomodar o header */
+    padding: 20px;
+    background-color: #f4f4f4;
+    margin-top: 80px; /* Margem para separar do cabeçalho */
+    padding-bottom: 40px; /* Espaçamento extra na parte inferior */
+}
+
+.carrinho-solicitacao-container {
+    width: 100%;
+    max-width: 800px; /* Define um tamanho máximo para o contêiner */
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra */
+    border-radius: 10px;
+    text-align: left; /* Alinhamento do texto à esquerda */
+    box-sizing: border-box; /* Inclui padding na largura total */
+    overflow: hidden; /* Esconde bordas arredondadas */
+}
+
+.carrinho-solicitacao-container h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.carrinho-solicitacao-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.carrinho-solicitacao-container ul li {
+    margin-bottom: 10px;
+}
+
+.carrinho-solicitacao-container ul li button {
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.carrinho-solicitacao-container ul li button:hover {
+    background-color: #0056b3;
 }

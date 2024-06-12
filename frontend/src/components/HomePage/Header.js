@@ -24,7 +24,7 @@ const Header = () => {
                 // Se estiver na página de solicitações, exibe apenas o link "Tela inicial"
                 <>
                   <li><Link to="/">Tela Inicial</Link></li>
-                  <li><button onClick={logout}>Logout</button></li>
+                  <li><button className="logout-button" onClick={logout}>Logout</button></li>
                 </>
               ) : (
                 // Se não estiver na página de solicitações, exibe os links "Solicitar Serviços" e "Logout"
