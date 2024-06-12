@@ -32,9 +32,8 @@ router.get('/servicos', (request, response) =>
     solicitacoesController.lerServicos(request, response)
 );
 
-router.put('/solicitacoes/:email', (request, response) =>
-    solicitacoesController.atualizarSolicitacoes(request, response)
-);
+router.delete('/solicitacoes/:id', (request, response) =>
+    solicitacoesController.excluirSolicitacao(request,response));
 
 router.post('/solicitacoes', (request, response) =>
     solicitacoesController.criarSolicitacao(request, response)
