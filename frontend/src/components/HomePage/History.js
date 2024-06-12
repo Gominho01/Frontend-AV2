@@ -1,5 +1,9 @@
 import React from 'react';
 import "../../styles/header.css"
+import Predio1 from '../../imagens/Predio1.jpeg';
+import Predio2 from '../../imagens/Predio2.jpeg';
+import Predio3 from '../../imagens/Predio3.jpeg';
+import Predio4 from '../../imagens/Predio4.jpeg';
 
 const History = () => {
     return (
@@ -9,10 +13,10 @@ const History = () => {
           <iframe width="420" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
           <h2>Galeria de Fotos</h2>
           <div className="gallery">
-            <img src="../imagens/Predio1.jpeg" alt="Foto 1" />
-            <img src="../imagens/Predio2.jpeg" alt="Foto 2" />
-            <img src="../imagens/Predio3.jpeg" alt="Foto 3" />
-            <img src="../imagens/Predio4.jpeg" alt="Foto 4" />
+            <img src={Predio1} alt="Foto 1" />
+            <img src={Predio2} alt="Foto 2" />
+            <img src={Predio3} alt="Foto 3" />
+            <img src={Predio4} alt="Foto 4" />
           </div>
       </>
     );

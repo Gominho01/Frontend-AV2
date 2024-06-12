@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
-import "../../styles/header.css";
+import Logo from '../../imagens/Logo.jpeg';
+
 
 const Header = () => {
   const location = useLocation();
@@ -11,7 +12,7 @@ const Header = () => {
 
   return (
     <header>
-      <img src="../imagens/Logo.jpeg" alt="Logo da Empresa" />
+      <img src={Logo} alt="Logo da Empresa" />
       <h1>Bem-vindo à Cloud Solutions</h1>
       <nav>
         <ul id="menu">
