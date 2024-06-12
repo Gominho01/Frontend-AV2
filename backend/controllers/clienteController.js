@@ -56,6 +56,25 @@ const buscarTodosClientes = async (req, res) => {
   }
 }
 
+const buscarClientePorEmail = async (req, res) => {
+  const { email } = req.params; // Obter o email do parâmetro da solicitação
+
+  try {
+    const cliente = await prisma.cliente.findUnique({
+      where: { email },
+    });
+
+    if (!cliente) {
+      return res.status(404).json({ message: "Cliente não encontrado" });
+    }
+
+    res.status(200).json({ cliente });
+  } catch (error) {
+    console.error("Erro ao buscar cliente por email:", error);
+    res.status(500).json({ message: "Erro interno do servidor" });
+  }
+};
+
 const trocarSenha = async (req, res) => {
   const { email, senhaAtual, novaSenha } = req.body;
 
@@ -130,4 +149,4 @@ const cadastrarCliente = async (req, res) => {
   }
 };
 
-module.exports = { buscarTodosClientes, trocarSenha, cadastrarCliente };
+module.exports = { buscarTodosClientes, trocarSenha, cadastrarCliente, buscarClientePorEmail};

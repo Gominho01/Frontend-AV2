@@ -35,6 +35,7 @@ model Solicitacao {
   servicoId   Int
   Estado      String
   dataPrevista DateTime
+  dataSolicitacao DateTime
   cliente     Cliente   @relation(fields: [clienteId], references: [id])
   servico     ServicoTI @relation(fields: [servicoId], references: [id])
 }

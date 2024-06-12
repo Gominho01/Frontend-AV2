@@ -23,6 +23,10 @@ router.get('/clientes', (request, response) =>
     clienteController.buscarTodosClientes(request, response)
 );
 
+router.get('/clientes/:email', (request, response) =>
+    clienteController.buscarClientePorEmail(request,response)
+);
+
 // Rotas de solicitações de serviços de TI
 router.get('/solicitacoes/:email',(request, response) =>
     solicitacoesController.lerSolicitacoes(request, response)

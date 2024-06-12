@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import api from '../services/api';
 import "../styles/styles_solicitacao.css";
-import { AuthContext } from '../context/authContext'; // Importe o contexto de autenticação
+import { AuthContext } from '../context/authContext'; // Importa o contexto de autenticação
 
 const CarrinhoSolicitacao = () => {
-  const { userLogin } = useContext(AuthContext); // Obtenha o email do contexto de autenticação
+  const { userLogin} = useContext(AuthContext); // Obtenha o email e o nome do contexto de autenticação
   const [servicos, setServicos] = useState([]);
   const [solicitacoes, setSolicitacoes] = useState([]);
   const [mensagem, setMensagem] = useState('');
+  const [userName, setUserName] = useState('');
 
   useEffect(() => {
     const fetchServicos = async () => {
@@ -16,6 +17,15 @@ const CarrinhoSolicitacao = () => {
         setServicos(response.data);
       } catch (error) {
         setMensagem('Erro ao carregar serviços');
+      }
+    };
+
+    const fetchUserName = async () => {
+      try {
+        const response = await api.get(`/api/clientes/${userLogin}`);
+        setUserName(response.data.cliente.nome);
+      } catch (error) {
+        setUserName('Nome não encontrado');
       }
     };
 
@@ -30,14 +40,20 @@ const CarrinhoSolicitacao = () => {
 
     fetchServicos();
     fetchSolicitacoes();
+    fetchUserName();
   }, [userLogin]);
+
+  const getServicoNome = (servicoId) => {
+    const servico = servicos.find(servico => servico.id === servicoId);
+    return servico ? servico.nome : 'Serviço não encontrado';
+  };
 
   const handleAdicionarSolicitacao = async (servicoId) => {
     try {
       const response = await api.post('/api/solicitacoes', {
-        email: userLogin, 
+        email: userLogin, // Enviando o email do cliente
         servicoId,
-        estado: 'Em Andamento', 
+        estado: 'Em Andamento', // Definindo o estado como "Em Andamento"
       });
       setSolicitacoes([...solicitacoes, response.data]);
     } catch (error) {
@@ -45,12 +61,13 @@ const CarrinhoSolicitacao = () => {
     }
   };
 
-  const handleExcluirSolicitacao = async (solicitacaoId) => {
+  const handleExcluirSolicitacao = async (id) => {
     try {
-      await api.delete(`/api/solicitacoes/${solicitacaoId}`);
-      setSolicitacoes(solicitacoes.filter(solicitacao => solicitacao.id !== solicitacaoId));
+      await api.delete(`/api/solicitacoes/${id}`);
+      setSolicitacoes(solicitacoes.filter(s => s.id !== id));
+      setMensagem('Solicitação excluída com sucesso');
     } catch (error) {
-      setMensagem('Erro ao excluir solicitação. Tente novamente mais tarde.');
+      setMensagem('Erro ao excluir solicitação');
     }
   };
 
@@ -58,11 +75,16 @@ const CarrinhoSolicitacao = () => {
     <div className="carrinho-solicitacao-container">
       <h1>Carrinho de Solicitação de Serviços</h1>
       <div>
+        <h2>Informações do Usuário</h2>
+        <p>Nome: {userName}</p>
+        <p>Email: {userLogin}</p>
+      </div>
+      <div>
         <h2>Serviços Disponíveis</h2>
         <ul>
           {servicos.map(servico => (
             <li key={servico.id}>
-              {servico.nome} - R$ {servico.preco.toFixed(2)}
+              {servico.nome} - R$ {servico.preco.toFixed(2)} - Prazo: {servico.prazo} dias
               <button onClick={() => handleAdicionarSolicitacao(servico.id)}>Adicionar Solicitação</button>
             </li>
           ))}
@@ -71,18 +93,15 @@ const CarrinhoSolicitacao = () => {
       <div>
         <h2>Suas Solicitações</h2>
         <ul>
-        {solicitacoes.map((solicitacao, index) => (
-          <li key={index}>
-            {solicitacao.servico ? (
-              <>
-                Serviço: {solicitacao.servico.nome}, Status: {solicitacao.Estado}, Data Prevista: {new Date(solicitacao.dataPrevista).toLocaleDateString()}
-              </>
-            ) : (
-              'Serviço não encontrado'
-            )}
-            <button onClick={() => handleExcluirSolicitacao(solicitacao.id)}>Excluir Solicitação</button>
-          </li>
-        ))}
+          {solicitacoes.map((solicitacao, index) => (
+            <li key={index}>
+              Data do Pedido: {new Date(solicitacao.dataSolicitacao).toLocaleDateString()},
+              ID: {solicitacao.id}, Nome do Serviço: {getServicoNome(solicitacao.servicoId)}, Status: {solicitacao.Estado}, 
+              Preço: R$ {servicos.find(servico => servico.id === solicitacao.servicoId)?.preco.toFixed(2)}, 
+              Data Prevista: {new Date(solicitacao.dataPrevista).toLocaleDateString()}
+              <button onClick={() => handleExcluirSolicitacao(solicitacao.id)}>Excluir Solicitação</button>
+            </li>
+          ))}
         </ul>
       </div>
       {mensagem && <p>{mensagem}</p>}

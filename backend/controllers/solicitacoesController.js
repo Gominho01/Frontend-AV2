@@ -32,6 +32,7 @@ const criarSolicitacao = async (req, res) => {
         servicoId: servicoId,
         Estado: estado,
         dataPrevista: dataPrevista,
+        dataSolicitacao: dataAtual,
       }
     });
 

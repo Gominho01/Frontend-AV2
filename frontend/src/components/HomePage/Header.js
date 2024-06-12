@@ -3,12 +3,14 @@ import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
 import Logo from '../../imagens/Logo.jpeg';
 
-
 const Header = () => {
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
   const isCadastroPage = location.pathname === '/cadastro-cliente';
   const { token, logout } = useContext(AuthContext);
+
+  // Verifica se está na página de solicitações
+  const isSolicitacoesPage = location.pathname === '/solicitacao';
 
   return (
     <header>
@@ -18,8 +20,19 @@ const Header = () => {
         <ul id="menu">
           {token ? (
             <>
-              <li><Link to="/solicitacao">Solicitar Serviços</Link></li>
-              <li><button onClick={logout}>Logout</button></li>
+              {isSolicitacoesPage ? (
+                // Se estiver na página de solicitações, exibe apenas o link "Tela inicial"
+                <>
+                  <li><Link to="/">Tela Inicial</Link></li>
+                  <li><button onClick={logout}>Logout</button></li>
+                </>
+              ) : (
+                // Se não estiver na página de solicitações, exibe os links "Solicitar Serviços" e "Logout"
+                <>
+                  <li><Link to="/solicitacao">Solicitar Serviços</Link></li>
+                  <li><button onClick={logout}>Logout</button></li>
+                </>
+              )}
             </>
           ) : isCadastroPage ? (
             <>
@@ -28,13 +41,13 @@ const Header = () => {
             </>
           ) : isLoginPage ? (
             <>
-            <li><Link to="/">Tela Inicial</Link></li>
-            <li><Link to="/cadastro-cliente">Cadastre-se</Link></li>
+              <li><Link to="/">Tela Inicial</Link></li>
+              <li><Link to="/cadastro-cliente">Cadastre-se</Link></li>
             </>
           ) : (
             <>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/cadastro-cliente">Cadastre-se</Link></li>
+              <li><Link to="/login">Login</Link></li>
+              <li><Link to="/cadastro-cliente">Cadastre-se</Link></li>
             </>
           )}
         </ul>
