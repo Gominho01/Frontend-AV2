@@ -1,118 +1,98 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-
-header {    
-    color: #fff;
-    padding: 20px 0;
+/* Centralização do contêiner de cadastro */
+.cadastro-cliente-container-wrapper {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-image: url('../imagens/imgheader.jpg');
-    background-size: cover;
-    background-position: center;
+    justify-content: center;
+    align-items: flex-start; /* Ajusta o alinhamento para o topo */
+    min-height: calc(100vh - 80px); /* Ajuste de altura para acomodar o header */
+    padding: 20px; /* Espaçamento interno para responsividade */
+    background-color: #f8f9fa; /* Cor de fundo para destacar */
+    margin-top: 80px; /* Menor margem para aproximar do header */
+    padding-bottom: 40px; /* Espaçamento extra na parte inferior */
 }
 
-#menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-#menu li {
-    display: inline-block;
-}
-
-#menu a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: rgb(142, 154, 196);
-    color: #fff;
-    text-decoration: none;
-    border-radius: 20px;
-    transition: background-color 0.3s;
-}
-
-#menu a:hover {
-    background-color: #999;
-}
-
-header h1 {
-    font-size: 24px;
-    margin: 0; 
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    margin-right: 20px;
-}
-
-nav ul li a:hover {
-    text-decoration: underline;
-}
-
-.logo img {
-    height: 80px;
-    width: auto;
-    margin-left:20px;
-}
-
-main {
-    padding: 20px;
+.cadastro-cliente-container {
+    width: 100%; /* O contêiner usa 100% da largura disponível */
+    max-width: 600px; /* Define um tamanho máximo */
+    padding: 20px; /* Padding interno */
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra */
+    border-radius: 10px;
     text-align: center;
+    box-sizing: border-box; /* Inclui padding na largura total */
 }
 
-h1 {
-    margin-bottom: 20px;
-}
-
+/* Ajustes para o formulário */
 .input-group {
     margin-bottom: 20px;
+    text-align: left;
 }
 
 .input-group label {
     display: block;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
-.input-group input {
-    width: 40%;
-    padding: 10px;
+.input-group input, 
+.input-group select {
+    width: 100%; /* Inputs e select ocupam 100% da largura do grupo */
+    padding: 12px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+
+/* Ajuste para radio buttons */
+.input-group input[type="radio"] {
+    width: auto; /* Ajuste a largura para auto para radios */
+    margin-right: 10px;
+}
+
+.input-group div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.input-group label[for] {
+    margin-left: 5px;
+}
+
+/* Centralização do botão */
+.button-group {
+    display: flex;
+    justify-content: center; /* Centraliza os botões */
+    gap: 10px;
+    margin-top: 30px;
 }
 
 .button-group button {
-    padding: 10px 20px;
-    margin-right: 10px;
+    width: 50%; /* Ajusta a largura dos botões */
+    padding: 12px; /* Padding interno dos botões */
     border-radius: 5px;
     border: none;
     background-color: #007bff;
     color: #fff;
+    font-size: 16px; /* Ajusta o tamanho da fonte */
     cursor: pointer;
+    box-sizing: border-box;
 }
 
-#clearBtn {
-    background-color: #dc3545; 
+.button-group button:hover {
+    background-color: #0056b3;
 }
 
-.input-group input[type="radio"]:checked + label::before {
-    background-color: #007bff; 
+.links {
+    margin-top: 20px;
 }
 
-.input-group select {
-    width: 40%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    appearance: none; 
-    background-image: url('data:image/svg+xml;utf8,<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>'); /* Adiciona uma seta personalizada */
-    background-repeat: no-repeat;
-    background-position: right 10px top 50%;
-    background-size: 20px;
-    cursor: pointer;
+.links a {
+    margin-right: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.links a:hover {
+    text-decoration: underline;
 }

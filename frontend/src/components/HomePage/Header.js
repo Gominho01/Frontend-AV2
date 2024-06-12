@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
 import Logo from '../../imagens/Logo.jpeg';
 
-
 const Header = () => {
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
@@ -19,7 +18,7 @@ const Header = () => {
           {token ? (
             <>
               <li><Link to="/solicitacao">Solicitar Serviços</Link></li>
-              <li><button onClick={logout}>Logout</button></li>
+              <li><button className="logout-button" onClick={logout}>Logout</button></li>
             </>
           ) : isCadastroPage ? (
             <>

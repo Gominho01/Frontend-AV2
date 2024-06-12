@@ -1,5 +1,6 @@
 // FounderTable.js
 import React from 'react';
+import "../../styles/index.css";
 
 const FounderTable = () => {
   return (

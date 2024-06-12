@@ -1,101 +1,62 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-
-header {    
-    color: #fff;
-    padding: 20px 0;
+/* Centralização do contêiner de login */
+.login-container-wrapper {
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
-    background-image: url('../imagens/imgheader.jpg');
-    background-size: cover;
-    background-position: center;
+    height: calc(100vh - 100px); /* Ajuste para acomodar o header */
 }
 
-#menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-#menu li {
-    display: inline-block;
-}
-
-#menu a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: rgb(142, 154, 196);
-    color: #fff;
-    text-decoration: none;
-    border-radius: 20px;
-    transition: background-color 0.3s;
-}
-
-#menu a:hover {
-    background-color: #999;
-}
-
-
-header h1 {
-    font-size: 24px;
-    margin: 0;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    margin-right: 20px;
-} 
-
-.logo img {
-    height: 80px;
-    width: auto;
-    margin-left:20px;
-}
-
-main {
-    padding: 20px;
+.login-container {
+    width: 600px; /* Aumenta a largura */
+    padding: 60px; /* Padding interno ajustado */
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra */
+    border-radius: 10px;
     text-align: center;
 }
 
-h1 {
-    margin-bottom: 20px;
-}
-
+/* Ajustes para o formulário */
 .input-group {
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Espaço entre grupos */
+    margin-top: 50px;
 }
 
 .input-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 5px; /* Espaço abaixo do label */
+    font-weight: bold; /* Torna o texto do rótulo em negrito */
 }
 
 .input-group input {
-    width: 40%;
-    padding: 10px;
-    border-radius: 5px;
+    width: 100%; /* Largura total */
+    padding: 15px; /* Padding interno dos inputs */
+    border-radius: 10px;
     border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 18px; /* Ajusta o tamanho da fonte */
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* Espaço entre os botões */
+    margin-top: 50px;
 }
 
 .button-group button {
-    padding: 10px 20px;
-    margin-right: 10px;
-    border-radius: 5px;
+    width: calc(50% - 20px); /* Ajusta a largura dos botões */
+    padding: 12px; /* Padding interno dos botões */
+    border-radius: 10px;
     border: none;
     background-color: #007bff;
     color: #fff;
+    font-size: 18px; /* Ajusta o tamanho da fonte */
     cursor: pointer;
 }
 
-.button-group a:hover {
+.button-group button:hover {
     background-color: #0056b3;
-  }
+}
 
 .links {
     margin-top: 20px;
