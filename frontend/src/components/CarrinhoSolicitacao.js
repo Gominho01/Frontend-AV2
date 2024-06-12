@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import api from '../services/api';
 import "../styles/styles_solicitacao.css";
+import { AuthContext } from '../context/authContext'; // Importe o contexto de autenticação
 
-const CarrinhoSolicitacao = ({ userLogin }) => {
+const CarrinhoSolicitacao = () => {
+  const { userLogin } = useContext(AuthContext); // Obtenha o email do contexto de autenticação
   const [servicos, setServicos] = useState([]);
   const [solicitacoes, setSolicitacoes] = useState([]);
   const [mensagem, setMensagem] = useState('');
@@ -30,25 +32,25 @@ const CarrinhoSolicitacao = ({ userLogin }) => {
     fetchSolicitacoes();
   }, [userLogin]);
 
-  const handleAtualizarSolicitacoes = async () => {
-    try {
-      const response = await api.put(`/api/solicitacoes/${userLogin}`, { solicitacoes });
-      setMensagem(response.data.message);
-    } catch (error) {
-      setMensagem('Erro ao atualizar solicitações');
-    }
-  };
-
   const handleAdicionarSolicitacao = async (servicoId) => {
     try {
       const response = await api.post('/api/solicitacoes', {
-        email: userLogin, // Assuming userLogin is the email
+        email: userLogin, 
         servicoId,
-        estado: 'Em Elaboração',
+        estado: 'Em Andamento', 
       });
       setSolicitacoes([...solicitacoes, response.data]);
     } catch (error) {
       setMensagem('Erro ao adicionar solicitação');
+    }
+  };
+
+  const handleExcluirSolicitacao = async (solicitacaoId) => {
+    try {
+      await api.delete(`/api/solicitacoes/${solicitacaoId}`);
+      setSolicitacoes(solicitacoes.filter(solicitacao => solicitacao.id !== solicitacaoId));
+    } catch (error) {
+      setMensagem('Erro ao excluir solicitação. Tente novamente mais tarde.');
     }
   };
 
@@ -69,15 +71,19 @@ const CarrinhoSolicitacao = ({ userLogin }) => {
       <div>
         <h2>Suas Solicitações</h2>
         <ul>
-          {solicitacoes.map((solicitacao, index) => (
-            <li key={index}>
-              Serviço: {solicitacao.servico.nome}, Status: {solicitacao.Estado}, Data Prevista: {new Date(solicitacao.dataPrevista).toLocaleDateString()}
-            </li>
-          ))}
+        {solicitacoes.map((solicitacao, index) => (
+          <li key={index}>
+            {solicitacao.servico ? (
+              <>
+                Serviço: {solicitacao.servico.nome}, Status: {solicitacao.Estado}, Data Prevista: {new Date(solicitacao.dataPrevista).toLocaleDateString()}
+              </>
+            ) : (
+              'Serviço não encontrado'
+            )}
+            <button onClick={() => handleExcluirSolicitacao(solicitacao.id)}>Excluir Solicitação</button>
+          </li>
+        ))}
         </ul>
-      </div>
-      <div className="button-group">
-        <button onClick={handleAtualizarSolicitacoes}>Atualizar Solicitações</button>
       </div>
       {mensagem && <p>{mensagem}</p>}
     </div>
