@@ -30,7 +30,7 @@ const Header = () => {
                 // Se não estiver na página de solicitações, exibe os links "Solicitar Serviços" e "Logout"
                 <>
                   <li><Link to="/solicitacao">Solicitar Serviços</Link></li>
-                  <li><button onClick={logout}>Logout</button></li>
+                  <li><button className="logout-button" onClick={logout}>Logout</button></li>
                 </>
               )}
             </>

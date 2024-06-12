@@ -1,58 +1,74 @@
 header {    
-    color: #fff;
-    padding: 20px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-image: url('../imagens/imgheader.jpg');
-    background-size: cover;
-    background-position: center;
-  }
-  
-  #menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  #menu li {
-    display: inline-block;
-  }
-  
-  #menu a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: rgb(142, 154, 196);
-    color: #fff;
-    text-decoration: none;
-    border-radius: 20px;
-    transition: background-color 0.3s;
-  }
-  
-  #menu a:hover {
-    background-color: #999;
-  }
-  
-  header img {
-    height: 80px;
-    width: auto;
-    margin-left:20px;
-  }
-  
-  header h1 {
-    font-size: 24px;
-    margin: 0; 
-    font-family: 'Poppins', sans-serif;
-    margin-left: 120px;
-  }
-  
-  nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    margin-right: 20px;
-  }
-  
-  nav ul li a:hover {
-    text-decoration: underline;
-  }
-  
+  color: #fff;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-image: url('../imagens/imgheader.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+#menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#menu li {
+  display: inline-block;
+}
+
+#menu a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: rgb(142, 154, 196);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 20px;
+  transition: background-color 0.3s;
+}
+
+#menu a:hover {
+  background-color: #999;
+}
+
+header img {
+  height: 80px;
+  width: auto;
+  margin-left:20px;
+}
+
+header h1 {
+  font-size: 24px;
+  margin: 0; 
+  font-family: 'Poppins', sans-serif;
+  margin-left: 120px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Estilo para o botão de logout */
+.logout-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: rgb(142, 154, 196);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 20px;
+  transition: background-color 0.3s;
+  border: none; /* Remove borda padrão do botão */
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #999;
+}
