@@ -19,7 +19,7 @@ npm install
 
 Run the backend:
 ```
-node index.js
+npm start
 ```
 
 Run the frontend 
