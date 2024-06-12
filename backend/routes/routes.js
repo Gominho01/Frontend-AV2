@@ -28,6 +28,10 @@ router.get('/solicitacoes/:email',(request, response) =>
     solicitacoesController.lerSolicitacoes(request, response)
 );
 
+router.get('/servicos', (request, response) =>
+    solicitacoesController.lerServicos(request, response)
+);
+
 router.put('/solicitacoes/:email', (request, response) =>
     solicitacoesController.atualizarSolicitacoes(request, response)
 );

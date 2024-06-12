@@ -10,7 +10,7 @@ const History = () => {
       <>
           <h2>Nossa História</h2>
           <p>Uma breve história da empresa...</p>
-          <iframe width="420" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+          <iframe title="history" width="420" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
           <h2>Galeria de Fotos</h2>
           <div className="gallery">
             <img src={Predio1} alt="Foto 1" />

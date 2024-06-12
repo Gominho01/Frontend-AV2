@@ -18,7 +18,7 @@ model Cliente {
   estadoCivil String @default("SOLTEIRO")
   escolaridade String @default("2o grau completo")
 
-  SolicitacaoServicoTI Solicitacao[]
+  Solicitacao Solicitacao[]
 }
 
 model ServicoTI {
@@ -26,16 +26,15 @@ model ServicoTI {
   nome        String
   preco       Int
   prazo       Int
-  SolicitacaoServicoTI Solicitacao[]
+  Solicitacao Solicitacao[]
 }
 
 model Solicitacao {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   clienteId   Int
   servicoId   Int
   Estado      String
   dataPrevista DateTime
-  cliente     Cliente  @relation(fields: [clienteId], references: [id])
+  cliente     Cliente   @relation(fields: [clienteId], references: [id])
   servico     ServicoTI @relation(fields: [servicoId], references: [id])
 }
-

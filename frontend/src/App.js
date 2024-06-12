@@ -13,9 +13,9 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/login" element={<LoginPageWrapper />} />
-          <Route path="/trocar-senha" element={<RequireAuth><TrocaSenhaPage /></RequireAuth>} />
+          <Route path="/trocar-senha" element={<TrocaSenhaPage />}/>
           <Route path="/cadastro-cliente" element={<CadastroClientePage />} />
-          <Route path="/carrinho-solicitacao" element={<RequireAuth><CarrinhoSolicitacaoPage /></RequireAuth>} />
+          <Route path="/solicitacao" element={<RequireAuth><CarrinhoSolicitacaoPage /></RequireAuth>} />
           <Route path="/" element={<HomePage />} />
         </Routes>
       </Router>

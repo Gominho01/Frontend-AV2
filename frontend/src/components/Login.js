@@ -10,6 +10,10 @@ const Login = ({ onLogin }) => {
   const [mensagem, setMensagem] = useState('');
   const navigate = useNavigate();
 
+  const handleEsqueceuSenha = () => {
+    navigate('/trocar-senha');
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -44,6 +48,7 @@ const Login = ({ onLogin }) => {
         </div>
         <div className="button-group">
           <button type="submit">Entrar</button>
+          <button type="button" onClick={handleEsqueceuSenha}>Esqueceu sua senha?</button>
         </div>
       </form>
       {mensagem && <p>{mensagem}</p>}

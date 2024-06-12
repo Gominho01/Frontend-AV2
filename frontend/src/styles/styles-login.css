@@ -93,6 +93,10 @@ h1 {
     cursor: pointer;
 }
 
+.button-group a:hover {
+    background-color: #0056b3;
+  }
+
 .links {
     margin-top: 20px;
 }

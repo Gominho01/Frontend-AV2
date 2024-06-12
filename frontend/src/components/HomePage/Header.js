@@ -18,7 +18,7 @@ const Header = () => {
         <ul id="menu">
           {token ? (
             <>
-              <li><Link to="/carrinho-solicitacao">Solicitar Serviços</Link></li>
+              <li><Link to="/solicitacao">Solicitar Serviços</Link></li>
               <li><button onClick={logout}>Logout</button></li>
             </>
           ) : isCadastroPage ? (

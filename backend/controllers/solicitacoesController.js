@@ -2,7 +2,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const criarSolicitacao = async (req, res) => {
-  const { email, servicoId, estado } = req.body;
+  const { email, clienteId, servicoId, estado } = req.body;
 
   try {
     // Obter o serviço de TI pelo ID para recuperar o prazo
@@ -21,7 +21,7 @@ const criarSolicitacao = async (req, res) => {
     // Criar a solicitação de serviço com a data prevista e o estado
     const novaSolicitacao = await prisma.solicitacao.create({
       data: {
-        email,
+        clienteId, // Incluído clienteId aqui
         servicoId,
         Estado: estado, // Incluído o estado aqui
         dataPrevista: dataPrevista,
@@ -85,8 +85,19 @@ const atualizarSolicitacoes = async (req, res) => {
   }
 };
 
+const lerServicos = async (req, res) => {
+  try {
+    const servicos = await prisma.servicoTI.findMany();
+    res.status(200).json(servicos);
+  } catch (error) {
+    console.error('Erro ao ler serviços:', error);
+    res.status(500).json({ message: 'Erro ao ler serviços' });
+  }
+};
+
 module.exports = {
   criarSolicitacao,
   lerSolicitacoes,
   atualizarSolicitacoes,
+  lerServicos,
 };

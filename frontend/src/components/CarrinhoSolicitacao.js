@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
-import "../styles/styles_solicitacao.css"
+import "../styles/styles_solicitacao.css";
 
 const CarrinhoSolicitacao = ({ userLogin }) => {
   const [servicos, setServicos] = useState([]);
@@ -10,8 +10,8 @@ const CarrinhoSolicitacao = ({ userLogin }) => {
   useEffect(() => {
     const fetchServicos = async () => {
       try {
-        const response = await api.get('/servico');
-        setServicos(response.data.servicos);
+        const response = await api.get('/api/servicos');
+        setServicos(response.data);
       } catch (error) {
         setMensagem('Erro ao carregar serviços');
       }
@@ -19,8 +19,8 @@ const CarrinhoSolicitacao = ({ userLogin }) => {
 
     const fetchSolicitacoes = async () => {
       try {
-        const response = await api.get(`/solicitacao/${userLogin}`);
-        setSolicitacoes(response.data.solicitacoes);
+        const response = await api.get(`/api/solicitacoes/${userLogin}`);
+        setSolicitacoes(response.data);
       } catch (error) {
         setMensagem('Erro ao carregar solicitações');
       }
@@ -32,21 +32,24 @@ const CarrinhoSolicitacao = ({ userLogin }) => {
 
   const handleAtualizarSolicitacoes = async () => {
     try {
-      const response = await api.put(`/solicitacao/${userLogin}`, { solicitacoes });
+      const response = await api.put(`/api/solicitacoes/${userLogin}`, { solicitacoes });
       setMensagem(response.data.message);
     } catch (error) {
       setMensagem('Erro ao atualizar solicitações');
     }
   };
 
-  const handleAdicionarSolicitacao = (servicoId) => {
-    const servico = servicos.find(s => s.id === servicoId);
-    const novaSolicitacao = {
-      servicoId: servico.id,
-      status: 'Em Elaboração',
-      dataPrevista: new Date().toISOString(),
-    };
-    setSolicitacoes([...solicitacoes, novaSolicitacao]);
+  const handleAdicionarSolicitacao = async (servicoId) => {
+    try {
+      const response = await api.post('/api/solicitacoes', {
+        email: userLogin, // Assuming userLogin is the email
+        servicoId,
+        estado: 'Em Elaboração',
+      });
+      setSolicitacoes([...solicitacoes, response.data]);
+    } catch (error) {
+      setMensagem('Erro ao adicionar solicitação');
+    }
   };
 
   return (
@@ -58,7 +61,7 @@ const CarrinhoSolicitacao = ({ userLogin }) => {
           {servicos.map(servico => (
             <li key={servico.id}>
               {servico.nome} - R$ {servico.preco.toFixed(2)}
-              <button onClick={() => handleAdicionarSolicitacao(servico.id)}>Adicionar</button>
+              <button onClick={() => handleAdicionarSolicitacao(servico.id)}>Adicionar Solicitação</button>
             </li>
           ))}
         </ul>
@@ -68,7 +71,7 @@ const CarrinhoSolicitacao = ({ userLogin }) => {
         <ul>
           {solicitacoes.map((solicitacao, index) => (
             <li key={index}>
-              Serviço: {solicitacao.servicoId}, Status: {solicitacao.status}, Data Prevista: {new Date(solicitacao.dataPrevista).toLocaleDateString()}
+              Serviço: {solicitacao.servico.nome}, Status: {solicitacao.Estado}, Data Prevista: {new Date(solicitacao.dataPrevista).toLocaleDateString()}
             </li>
           ))}
         </ul>
