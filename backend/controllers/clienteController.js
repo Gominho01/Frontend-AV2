@@ -76,7 +76,7 @@ const buscarClientePorEmail = async (req, res) => {
 };
 
 const trocarSenha = async (req, res) => {
-  const { email, senhaAtual, novaSenha } = req.body;
+  const { login, novaSenha, senhaAtual } = req.body;
 
   if (!senhaValida(novaSenha)) {
     return res.status(400).json({ message: 'A nova senha deve conter pelo menos 8 caracteres, incluindo letra maiúscula, minúscula, número e caractere especial.' });
@@ -84,7 +84,7 @@ const trocarSenha = async (req, res) => {
 
   try {
     const cliente = await prisma.cliente.findUnique({
-      where: { email }
+      where: { email: login }
     });
 
     if (!cliente) {
@@ -97,7 +97,7 @@ const trocarSenha = async (req, res) => {
     }
 
     await prisma.cliente.update({
-      where: { email },
+      where: { email: login },
       data: { senha: novaSenha }
     });
 
