@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import api from '../services/api';
+import "../styles/styles_trocar.css";
 
 const TrocaSenha = () => {
   const [login, setLogin] = useState('');
@@ -18,28 +19,48 @@ const TrocaSenha = () => {
   };
 
   return (
-    <div className="troca-senha-container">
-      <h1>Troca de Senha</h1>
-      <form onSubmit={handleTrocaSenha}>
-        <div className="input-group">
-          <label htmlFor="login">Login</label>
-          <input type="text" id="login" value={login} onChange={(e) => setLogin(e.target.value)} />
-        </div>
-        <div className="input-group">
-          <label htmlFor="senhaAtual">Senha Atual</label>
-          <input type="password" id="senhaAtual" value={senhaAtual} onChange={(e) => setSenhaAtual(e.target.value)} />
-        </div>
-        <div className="input-group">
-          <label htmlFor="novaSenha">Nova Senha</label>
-          <input type="password" id="novaSenha" value={novaSenha} onChange={(e) => setNovaSenha(e.target.value)} />
-        </div>
-        <div className="button-group">
-          <button type="submit">Trocar Senha</button>
-        </div>
-      </form>
-      {mensagem && <p>{mensagem}</p>}
+    <div className="troca-senha-wrapper">
+      <div className="troca-senha-container">
+        <h1>Troca de Senha</h1>
+        <form onSubmit={handleTrocaSenha}>
+          <div className="input-group">
+            <label htmlFor="login">Login</label>
+            <input 
+              type="text" 
+              id="login" 
+              value={login} 
+              onChange={(e) => setLogin(e.target.value)} 
+              placeholder="Digite seu login" 
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="senhaAtual">Senha Atual</label>
+            <input 
+              type="password" 
+              id="senhaAtual" 
+              value={senhaAtual} 
+              onChange={(e) => setSenhaAtual(e.target.value)} 
+              placeholder="Digite sua senha atual" 
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="novaSenha">Nova Senha</label>
+            <input 
+              type="password" 
+              id="novaSenha" 
+              value={novaSenha} 
+              onChange={(e) => setNovaSenha(e.target.value)} 
+              placeholder="Digite a nova senha" 
+            />
+          </div>
+          <div className="button-group">
+            <button type="submit">Trocar Senha</button>
+          </div>
+        </form>
+        {mensagem && <p>{mensagem}</p>}
+      </div>
     </div>
   );
 };
 
-export default TrocaSenha;
+export default TrocaSenha;
