@@ -43,7 +43,6 @@ const cpfValido = (cpf) => {
   return true;
 };
 
-// Função para calcular idade a partir da data de nascimento
 const calcularIdade = (nascimento) => {
   const hoje = new Date();
   const nascimentoDate = new Date(nascimento);
@@ -122,36 +121,30 @@ const trocarSenha = async (req, res) => {
 const cadastrarCliente = async (req, res) => {
   const { nome, email, senha, cpf, telefone, nascimento, estadoCivil } = req.body;
 
-  // Validação da senha
   if (!senhaValida(senha)) {
     return res.status(400).json({ message: 'A senha deve conter pelo menos 8 caracteres, incluindo letra maiúscula, minúscula, número e caractere especial.' });
   }
 
-  // Validação do formato do CPF
   if (!formatoCpfValido(cpf)) {
     return res.status(400).json({ message: 'O CPF deve ter a máscara no formato NNN.NNN.NNN-NN.' });
   }
 
-  // Validação do CPF usando o algoritmo
   if (!cpfValido(cpf)) {
     return res.status(400).json({ message: 'O CPF fornecido é inválido.' });
   }
 
-  // Validação da idade
   const idade = calcularIdade(nascimento);
   if (idade < 18) {
     return res.status(400).json({ message: 'Cliente deve ter pelo menos 18 anos para se cadastrar.' });
   }
 
   try {
-    // Verificação se o cliente já existe
     const clienteExistente = await prisma.cliente.findUnique({ where: { email } });
 
     if (clienteExistente) {
       return res.status(400).json({ message: "Email já cadastrado" });
     }
 
-    // Criação do cliente
     await prisma.cliente.create({
       data: {
         nome,

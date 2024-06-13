@@ -1,25 +1,24 @@
-/* Estilos para centralizar o componente de troca de senha */
 .troca-senha-wrapper {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Ajusta o alinhamento para o topo */
-    min-height: calc(100vh - 80px); /* Ajuste de altura para acomodar o header */
+    align-items: flex-start; 
+    min-height: calc(100vh - 80px); 
     padding: 20px;
     background-color: #f4f4f4;
-    margin-top: 80px; /* Margem para separar do cabeçalho */
-    padding-bottom: 40px; /* Espaçamento extra na parte inferior */
+    margin-top: 80px; 
+    padding-bottom: 40px; 
 }
 
 .troca-senha-container {
     width: 100%;
-    max-width: 500px; /* Define um tamanho máximo para o contêiner */
+    max-width: 500px; 
     padding: 20px;
     background-color: #fff;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); 
     border-radius: 10px;
-    text-align: left; /* Alinhamento do texto à esquerda */
-    box-sizing: border-box; /* Inclui padding na largura total */
-    overflow: hidden; /* Esconde bordas arredondadas */
+    text-align: left; 
+    box-sizing: border-box; 
+    overflow: hidden; 
 }
 
 .troca-senha-container h1 {
@@ -31,7 +30,7 @@
 .troca-senha-container form {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Espaçamento entre os campos do formulário */
+    gap: 20px;
 }
 
 .input-group label {
@@ -41,7 +40,7 @@
 }
 
 .input-group input {
-    width: 100%; /* Inputs ocupam 100% da largura do grupo */
+    width: 100%; 
     padding: 12px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -49,21 +48,20 @@
     box-sizing: border-box;
 }
 
-/* Centralização do botão */
 .button-group {
     display: flex;
-    justify-content: center; /* Centraliza o botão */
+    justify-content: center;
     margin-top: 20px;
 }
 
 .button-group button {
-    width: 50%; /* Ajusta a largura do botão */
-    padding: 12px; /* Padding interno do botão */
+    width: 50%; 
+    padding: 12px; 
     border-radius: 5px;
     border: none;
     background-color: #007bff;
     color: #fff;
-    font-size: 16px; /* Ajusta o tamanho da fonte */
+    font-size: 16px; 
     cursor: pointer;
     box-sizing: border-box;
 }

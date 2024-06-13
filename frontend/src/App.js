@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import TrocaSenhaPage from './pages/TrocaSenhaPage';
 import CadastroClientePage from './pages/CadastroClientePage';
 import CarrinhoSolicitacaoPage from './pages/CarrinhoSolicitacaoPage';
+import CriarServico from './pages/CriarServicoPage';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/cadastro-cliente" element={<CadastroClientePage />} />
           <Route path="/solicitacao" element={<RequireAuth><CarrinhoSolicitacaoPage /></RequireAuth>} />
           <Route path="/" element={<HomePage />} />
+          <Route path="/criar-servico" element={<CriarServico />} />
         </Routes>
       </Router>
     </AuthProvider>

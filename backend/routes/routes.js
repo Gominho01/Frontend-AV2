@@ -36,6 +36,10 @@ router.get('/servicos', (request, response) =>
     solicitacoesController.lerServicos(request, response)
 );
 
+router.post('/criar-servicos', (request,response) =>
+    solicitacoesController.criarServico(request, response)
+);
+
 router.delete('/solicitacoes/:id', (request, response) =>
     solicitacoesController.excluirSolicitacao(request,response));
 

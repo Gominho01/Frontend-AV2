@@ -2,11 +2,13 @@ import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
 import Logo from '../../imagens/Logo.jpeg';
+import '../../styles/header.css'
 
 const Header = () => {
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
   const isCadastroPage = location.pathname === '/cadastro-cliente';
+  const isHomePage = location.pathname === '/'
   const { token, logout } = useContext(AuthContext);
 
   // Verifica se está na página de solicitações
@@ -15,7 +17,11 @@ const Header = () => {
   return (
     <header>
       <img src={Logo} alt="Logo da Empresa" />
-      <h1>Bem-vindo à Cloud Solutions</h1>
+      {isHomePage ? (
+        <h1>Bem-vindo à Cloud Solutions</h1>
+      ):(
+        <></>
+      )}
       <nav>
         <ul id="menu">
           {token ? (
@@ -24,6 +30,7 @@ const Header = () => {
                 // Se estiver na página de solicitações, exibe apenas o link "Tela inicial"
                 <>
                   <li><Link to="/">Tela Inicial</Link></li>
+                  <li><Link to="/criar-servico">Criar serviços</Link></li>
                   <li><button className="logout-button" onClick={logout}>Logout</button></li>
                 </>
               ) : (

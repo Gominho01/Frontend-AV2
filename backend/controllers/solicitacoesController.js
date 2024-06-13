@@ -99,9 +99,35 @@ const lerServicos = async (req, res) => {
   }
 };
 
+// controllers/servicoController.js
+
+const criarServico = async (req, res) => {
+  try {
+    const { nome, preco, prazo } = req.body;
+
+    if (!nome || !preco || !prazo) {
+      return res.status(400).json({ error: 'Nome, preço e prazo são obrigatórios' });
+    }
+
+    const novoServico = await prisma.servicoTI.create({
+      data: {
+        nome: nome,
+        preco: parseFloat(preco),
+        prazo: parseInt(prazo, 10),
+      },
+    });
+
+    res.status(201).json(novoServico);
+  } catch (error) {
+    console.error('Erro ao criar serviço:', error);
+    res.status(500).json({ error: 'Erro ao criar serviço' });
+  }
+};
+
 module.exports = {
   criarSolicitacao,
   lerSolicitacoes,
   lerServicos,
   excluirSolicitacao,
+  criarServico,
 };

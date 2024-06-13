@@ -2,10 +2,8 @@ import React from 'react';
 import Header from '../components/HomePage/Header';
 import Services from '../components/HomePage/Services';
 import FounderTable from '../components/HomePage/FounderTable';
-import Contact from '../components/HomePage/Contact';
-import Address from '../components/HomePage/Address';
+import Footer from '../components/HomePage/Footer';
 import History from '../components/HomePage/History';
-import PaymentMethods from '../components/HomePage/PaymentMethods';
 
 const Home = () => {
   return (
@@ -17,9 +15,7 @@ const Home = () => {
         <FounderTable />
       </section>
       <footer>
-        <Contact />
-        <Address />
-        <PaymentMethods />
+        <Footer/>
       </footer>
     </div>
   );

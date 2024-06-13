@@ -1,27 +1,25 @@
-/* Centralização do contêiner de cadastro */
 .cadastro-cliente-container-wrapper {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Ajusta o alinhamento para o topo */
-    min-height: calc(100vh - 80px); /* Ajuste de altura para acomodar o header */
-    padding: 20px; /* Espaçamento interno para responsividade */
-    background-color: #f8f9fa; /* Cor de fundo para destacar */
-    margin-top: 80px; /* Menor margem para aproximar do header */
-    padding-bottom: 40px; /* Espaçamento extra na parte inferior */
+    align-items: flex-start; 
+    min-height: calc(100vh - 80px); 
+    padding: 20px; 
+    background-color: #f8f9fa; 
+    margin-top: 80px; 
+    padding-bottom: 40px;
 }
 
 .cadastro-cliente-container {
-    width: 100%; /* O contêiner usa 100% da largura disponível */
-    max-width: 600px; /* Define um tamanho máximo */
-    padding: 20px; /* Padding interno */
+    width: 100%; 
+    max-width: 600px; 
+    padding: 20px;
     background-color: #fff;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); 
     border-radius: 10px;
     text-align: center;
-    box-sizing: border-box; /* Inclui padding na largura total */
+    box-sizing: border-box; 
 }
 
-/* Ajustes para o formulário */
 .input-group {
     margin-bottom: 20px;
     text-align: left;
@@ -35,7 +33,7 @@
 
 .input-group input, 
 .input-group select {
-    width: 100%; /* Inputs e select ocupam 100% da largura do grupo */
+    width: 100%;
     padding: 12px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -43,9 +41,8 @@
     box-sizing: border-box;
 }
 
-/* Ajuste para radio buttons */
 .input-group input[type="radio"] {
-    width: auto; /* Ajuste a largura para auto para radios */
+    width: auto;
     margin-right: 10px;
 }
 
@@ -59,22 +56,21 @@
     margin-left: 5px;
 }
 
-/* Centralização do botão */
 .button-group {
     display: flex;
-    justify-content: center; /* Centraliza os botões */
+    justify-content: center; 
     gap: 10px;
     margin-top: 30px;
 }
 
 .button-group button {
-    width: 50%; /* Ajusta a largura dos botões */
-    padding: 12px; /* Padding interno dos botões */
+    width: 50%; 
+    padding: 12px; 
     border-radius: 5px;
     border: none;
     background-color: #007bff;
     color: #fff;
-    font-size: 16px; /* Ajusta o tamanho da fonte */
+    font-size: 16px;
     cursor: pointer;
     box-sizing: border-box;
 }

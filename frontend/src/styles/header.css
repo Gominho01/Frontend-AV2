@@ -56,7 +56,6 @@ nav ul li a:hover {
   text-decoration: underline;
 }
 
-/* Estilo para o botão de logout */
 .logout-button {
   display: inline-block;
   padding: 10px 20px;
@@ -65,7 +64,7 @@ nav ul li a:hover {
   text-decoration: none;
   border-radius: 20px;
   transition: background-color 0.3s;
-  border: none; /* Remove borda padrão do botão */
+  border: none; 
   cursor: pointer;
 }
 
