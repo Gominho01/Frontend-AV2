@@ -4,6 +4,7 @@ const router = express.Router();
 const authController = require('../controllers/authController');
 const solicitacoesController = require('../controllers/solicitacoesController');
 const clienteController = require('../controllers/clienteController');
+const servicoController = require('../controllers/servicosController');
 
 // Rotas de autenticação
 router.post('/login', (request, response) =>
@@ -33,11 +34,11 @@ router.get('/solicitacoes/:email',(request, response) =>
 );
 
 router.get('/servicos', (request, response) =>
-    solicitacoesController.lerServicos(request, response)
+    servicoController.lerServicos(request, response)
 );
 
 router.post('/criar-servicos', (request,response) =>
-    solicitacoesController.criarServico(request, response)
+    servicoController.criarServico(request, response)
 );
 
 router.delete('/solicitacoes/:id', (request, response) =>

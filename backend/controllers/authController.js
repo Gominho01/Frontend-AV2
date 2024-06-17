@@ -8,7 +8,7 @@ const autenticacao = async (req, res) => {
       where: { email }
     });
     if (!cliente || cliente.senha !== senha) {
-      return res.status(401).json({ message: "Credenciais inválidas", result: false });
+      return res.status(401).json({ message: "Credenciais inválidas",});
     }
     res.status(200).json({ message: "Autenticação bem-sucedida", result: true });
   } catch (error) {

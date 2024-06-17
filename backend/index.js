@@ -3,7 +3,9 @@ const express = require('express');
 const app = express();
 const routes = require('./routes/routes');
 const cors = require('cors');
+const helmet = require('helmet')
 
+app.use(helmet())
 app.use(express.json());
 app.use(cors())
 app.use('/api', routes);
