@@ -1,5 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+const { z } = require('zod');
 
 const senhaValida = (senha) => {
   const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
@@ -56,6 +57,16 @@ const calcularIdade = (nascimento) => {
   return idade;
 };
 
+const clienteSchema = z.object({
+  nome: z.string().min(1, "Nome é obrigatório"),
+  email: z.string().email("Email inválido"),
+  senha: z.string().refine(senhaValida, "A senha deve conter pelo menos 8 caracteres, incluindo letra maiúscula, minúscula, número e caractere especial."),
+  cpf: z.string().refine(formatoCpfValido, "O CPF deve ter a máscara no formato NNN.NNN.NNN-NN.").refine(cpfValido, "O CPF fornecido é inválido."),
+  telefone: z.string().min(1, "Telefone é obrigatório"),
+  nascimento: z.string().refine((nascimento) => calcularIdade(nascimento) >= 18, "Cliente deve ter pelo menos 18 anos para se cadastrar."),
+  estadoCivil: z.string().min(1, "Estado Civil é obrigatório"),
+});
+
 const buscarTodosClientes = async (req, res) => {
   try {
     const clientes = await prisma.cliente.findMany();
@@ -85,14 +96,18 @@ const buscarClientePorEmail = async (req, res) => {
   }
 };
 
+const trocarSenhaSchema = z.object({
+  login: z.string().email("Email inválido"),
+  novaSenha: z.string().refine(senhaValida, "A nova senha deve conter pelo menos 8 caracteres, incluindo letra maiúscula, minúscula, número e caractere especial."),
+  senhaAtual: z.string().min(1, "Senha atual é obrigatória"),
+});
+
 const trocarSenha = async (req, res) => {
   const { login, novaSenha, senhaAtual } = req.body;
 
-  if (!senhaValida(novaSenha)) {
-    return res.status(400).json({ message: 'A nova senha deve conter pelo menos 8 caracteres, incluindo letra maiúscula, minúscula, número e caractere especial.' });
-  }
-
   try {
+    trocarSenhaSchema.parse({ login, novaSenha, senhaAtual });
+
     const cliente = await prisma.cliente.findUnique({
       where: { email: login }
     });
@@ -113,6 +128,9 @@ const trocarSenha = async (req, res) => {
 
     res.status(200).json({ message: "Senha atualizada com sucesso" });
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({ message: error.errors.map(err => err.message).join(", ") });
+    }
     console.error("Erro ao trocar senha:", error);
     res.status(500).json({ message: "Erro interno do servidor" });
   }
@@ -121,24 +139,9 @@ const trocarSenha = async (req, res) => {
 const cadastrarCliente = async (req, res) => {
   const { nome, email, senha, cpf, telefone, nascimento, estadoCivil } = req.body;
 
-  if (!senhaValida(senha)) {
-    return res.status(400).json({ message: 'A senha deve conter pelo menos 8 caracteres, incluindo letra maiúscula, minúscula, número e caractere especial.' });
-  }
-
-  if (!formatoCpfValido(cpf)) {
-    return res.status(400).json({ message: 'O CPF deve ter a máscara no formato NNN.NNN.NNN-NN.' });
-  }
-
-  if (!cpfValido(cpf)) {
-    return res.status(400).json({ message: 'O CPF fornecido é inválido.' });
-  }
-
-  const idade = calcularIdade(nascimento);
-  if (idade < 18) {
-    return res.status(400).json({ message: 'Cliente deve ter pelo menos 18 anos para se cadastrar.' });
-  }
-
   try {
+    clienteSchema.parse({ nome, email, senha, cpf, telefone, nascimento, estadoCivil });
+
     const clienteExistente = await prisma.cliente.findUnique({ where: { email } });
 
     if (clienteExistente) {
@@ -152,16 +155,18 @@ const cadastrarCliente = async (req, res) => {
         senha,
         cpf,
         telefone,
-        nascimento: new Date(nascimento), // Certifique-se de que a data está no formato correto
+        nascimento: new Date(nascimento),
         estadoCivil
       }
     });
-
+    
     res.status(201).json({ message: "Cliente cadastrado com sucesso" });
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({ message: error.errors.map(err => err.message).join(", ") });
+    }
     console.error('Erro ao cadastrar cliente:', error);
 
-    // Diferenciação de erros específicos
     if (error.meta && error.meta.target && error.meta.target.includes('email')) {
       return res.status(400).json({ message: 'Este email já está em uso.' });
     }

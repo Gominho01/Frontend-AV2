@@ -33,14 +33,14 @@ const CriarServico = () => {
       setPreco('');
       setPrazo('');
     } catch (error) {
-      setMensagem('Erro ');
+      setMensagem('Erro ao criar serviço');
     }
   };
 
   return (
     <div className="criar-servico-wrapper">
       <div className="criar-servico-container">
-        <h2>Criar Novo Serviço</h2>
+        <h1>Criar Novo Serviço</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="nome">Nome do Serviço:</label>
