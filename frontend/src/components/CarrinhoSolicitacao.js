@@ -1,7 +1,7 @@
 // CarrinhoSolicitacao.js
 import React, { useState, useEffect, useContext } from 'react';
 import api from '../services/api';
-import "../styles/styles_solicitacao.css";
+import "./styles/solicitacao.css";
 import { AuthContext } from '../context/authContext'; // Importa o contexto de autenticação
 
 const CarrinhoSolicitacao = () => {

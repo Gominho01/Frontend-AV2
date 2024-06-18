@@ -1,4 +1,5 @@
 import React from 'react';
+import "../styles/footer.css"
 import pix from '../../imagens/pix.png';
 import cartao from '../../imagens/cartao.png';
 import boleto from '../../imagens/boleto.png';

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import api from '../services/api';
-import "../styles/styles_servico.css";
+import "./styles/servico.css";
 
 const CriarServico = () => {
   const [nome, setNome] = useState('');

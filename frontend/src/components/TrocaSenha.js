@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import api from '../services/api';
-import "../styles/styles_trocar.css";
+import "./styles/trocar.css";
 
 const TrocaSenha = () => {
   const [login, setLogin] = useState('');

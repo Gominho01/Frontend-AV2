@@ -116,14 +116,16 @@ const trocarSenha = async (req, res) => {
       return res.status(404).json({ message: "Cliente não encontrado" });
     }
 
-    const senhaCorreta = senhaAtual === cliente.senha;
+    const senhaCorreta = await bcrypt.compare(senhaAtual, cliente.senha);
     if (!senhaCorreta) {
       return res.status(401).json({ message: "Senha atual incorreta" });
     }
 
+    const hashedNovaSenha = await bcrypt.hash(novaSenha, 10);
+
     await prisma.cliente.update({
       where: { email: login },
-      data: { senha: novaSenha }
+      data: { senha: hashedNovaSenha }
     });
 
     res.status(200).json({ message: "Senha atualizada com sucesso" });

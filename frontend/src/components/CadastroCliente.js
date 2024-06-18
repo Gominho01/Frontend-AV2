@@ -1,6 +1,7 @@
 // CadastroCliente.js
 import React, { useState } from 'react';
 import api from '../services/api';
+import "./styles/cadastro.css"
 
 const CadastroCliente = () => {
   const [formData, setFormData] = useState({

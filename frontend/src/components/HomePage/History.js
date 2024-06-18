@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import "../../styles/index.css"
+import "../styles/home.css"
 import Predio1 from '../../imagens/Predio1.jpeg';
 import Predio2 from '../../imagens/Predio2.jpeg';
 import Predio3 from '../../imagens/Predio3.jpeg';

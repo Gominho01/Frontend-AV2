@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
 import Logo from '../../imagens/Logo.jpeg';
-import '../../styles/header.css'
+import '../styles/header.css'
 
 const Header = () => {
   const location = useLocation();

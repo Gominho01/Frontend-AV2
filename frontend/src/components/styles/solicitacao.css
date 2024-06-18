@@ -48,48 +48,6 @@ th {
     background-color: #c82333;
 }
 
-footer {
-    padding: 20px;
-    color: #fff;
-    text-align: center;
-    background-image: url('../imagens/imgheader.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-footer div {
-    margin-bottom: 20px;
-}
-
-.contact, .address, .payment {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.contact ul {
-    list-style: none;
-    padding: 0;
-}
-
-.contact ul li {
-    margin-bottom: 10px;
-}
-
-.contact a {
-    color: #fff;
-    text-decoration: none;
-}
-
-.contact a:hover {
-    text-decoration: underline;
-}
-
-.payment img {
-    max-width: 50px;
-    margin: 0 5px;
-}
-
 .carrinho-solicitacao-wrapper {
     display: flex;
     justify-content: center;
